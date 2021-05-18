@@ -18,5 +18,15 @@ export class CvGateway {
     return data + 'Hello';
     console.log('cvs', this.cvservice.cvs);
   }
+
+  @SubscribeMessage('allCvs')
+  async handleCvEvent(): Promise<void> {
+    try {
+      const cvs = await this.cvservice.getAllCvs();
+      this.server.emit('allCvs', cvs);
+    } catch (e) {
+      console.log(e.message);
+    }
+  }
 }
 //min 51//
