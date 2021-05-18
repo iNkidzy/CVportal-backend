@@ -1,9 +1,10 @@
 export interface Cv {
   id: string;
   name: string;
-  description: string;
   education: string;
-  skill: string;
+  skills: string;
+  experience: string;
   image: string;
+  contact: string;
   video: string;
 }
