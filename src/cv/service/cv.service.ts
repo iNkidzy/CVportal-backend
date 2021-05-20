@@ -1,8 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Cv } from '../shared/cv.model';
 import { v4 as uuidv4 } from 'uuid';
-import { createCvDto } from '../dto/create-cv.dto';
-import { CvDto } from '../dto/cv.dto';
 
 @Injectable()
 export class CvService {
@@ -15,8 +13,10 @@ export class CvService {
   }
   /* getAllCvs(): CvDto[] {
     return this.cvs;
-  }*/
+  }
   deleteCv(id: string): void {
     this.cvs = this.cvs.filter((c) => c.id !== id);
   }
+
+   */
 }

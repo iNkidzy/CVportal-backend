@@ -7,7 +7,6 @@ import {
 } from '@nestjs/websockets';
 import { createCvDto } from '../dto/create-cv.dto';
 import { CvService } from '../service/cv.service';
-import { CvDto } from '../dto/cv.dto';
 import { Cv } from '../shared/cv.model';
 import { Socket } from 'socket.io';
 
@@ -18,17 +17,18 @@ export class CvGateway {
   @WebSocketServer() server;
 
   @SubscribeMessage('create-cv')
-  handleCVEvent(
+  handleCreateCVEvent(
     @MessageBody() data: createCvDto,
     @ConnectedSocket() client: Socket,
   ): void {
     const cv: Cv = {
       name: data.name,
+      description: data.description,
       education: data.education,
-      skills: data.skills,
       experience: data.experience,
-      image: data.image,
+      skills: data.skills,
       contact: data.contact,
+      image: data.image,
       video: data.video,
     };
     try {
@@ -41,6 +41,21 @@ export class CvGateway {
       client.emit('cv-error', e.message);
     }
   }
+
+  /*
+  handleConnection(client: Socket, ...args: any[]): any {
+    console.log('Client is Connected', client.id);
+    client.emit('allCvs', this.cvService.getAllCv());
+    this.server.emit('clients', this.cvService.getClients());
+  }
+
+  handleDisconnect(client: Socket): any {
+    this.chatService.delete(client.id);
+    this.server.emit('clients', this.cvService.getClients());
+    console.log('Client is Disconnected', this.cvService.getClients());
+  }
+
+ */
 }
 
 /* @SubscribeMessage('allCvs')
