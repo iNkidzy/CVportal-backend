@@ -13,8 +13,7 @@ export class CvService {
     this.cvs.push(cv);
     return cv;
   }
-
- /* getAllCvs(): CvDto[] {
+  /* getAllCvs(): CvDto[] {
     return this.cvs;
   }*/
   deleteCv(id: string): void {
