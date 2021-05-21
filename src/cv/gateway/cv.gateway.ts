@@ -36,7 +36,6 @@ export class CvGateway {
       this.cvService.createCv(cv);
       client.emit('cv-created', data);
       this.server.emit('cvs', data);
-      console.log('cvs', this.cvService.cvs);
     } catch (e) {
       client.emit('cv-error', e.message);
     }
