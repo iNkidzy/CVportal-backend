@@ -32,9 +32,9 @@ export class CvGateway {
       video: data.video,
     };
     try {
-      console.log(data);
       this.cvService.createCv(cv);
       client.emit('cv-created', data);
+      this.server.emit('cv-created', data);
       this.server.emit('cvs', data);
     } catch (e) {
       client.emit('cv-error', e.message);
